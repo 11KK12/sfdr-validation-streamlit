@@ -8,3 +8,4 @@ azure-ai-formrecognizer
 pdfplumber
 openai==0.28
 azure-core
+openpyxl
