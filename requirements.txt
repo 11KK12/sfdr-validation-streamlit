@@ -3,3 +3,9 @@ numpy
 pandas
 pydeck
 streamlit
+PyPDF2
+azure-ai-formrecognizer
+pdfplumber
+openai==0.28
+azure-core
+json
