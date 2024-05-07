@@ -34,7 +34,7 @@ def run():
         
         download_button_placeholder.download_button(
           label="📥 Download validation results",
-          data=output.getvalue(),
+          data=output,
           file_name="validation_results.xlsx",
           type="primary",
           use_container_width=True,
@@ -116,14 +116,15 @@ def run():
                     validation_results = validate(tempys, index)
                     template_checks[id] = validation_results
           
-                output = template_checks_to_excel(tempys, template_checks)
-                output = change_excel_design(output)
+                sheet = template_checks_to_excel(tempys, template_checks)
+                #output = sheet.getvalue()
+                output = change_excel_design(sheet)
                 st.session_state.file_results[uploaded_file.name] = output
                 st.balloons()
 
                 download_button_placeholder.download_button(
                     label="📥 Download validation results",
-                    data=output.getvalue(),
+                    data=output,
                     file_name="validation_results.xlsx",
                     type="primary",
                     use_container_width=True,
