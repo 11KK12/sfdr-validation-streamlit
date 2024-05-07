@@ -17,6 +17,7 @@ def run():
   #st.markdown("")
 
   uploaded_file = st.file_uploader("Please select a PDF file that contains SFDR templates")
+  start_button_disabled = True
 
   if uploaded_file is not None:
     
@@ -37,12 +38,13 @@ def run():
             st.markdown(str(template_count) + " template(s) found in the provided document.")
             estimated_costs = estimate_costs(template_count)
             st.markdown("\nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
-            placeholder_2.text("\nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
-  
-      if st.button("Start", type="primary", use_container_width=True):
+            start_button_disabled = False
+            
+      if st.button("Start", type="primary", use_container_width=True, disabled=start_button_disabled):
 
           # TODO hide button after click
           text_placeholder.empty()
+          start_button_disabled = True
 
           # Create dataframe to store extraction results
           template_fields = pd.DataFrame()
