@@ -15,6 +15,7 @@ from openpyxl.styles import Border, Side
 import os
 import streamlit as st
 import io
+from tempfile import NamedTemporaryFile
 
 # Set up open AI
 try:
@@ -919,6 +920,10 @@ def change_excel_design(buffer):
             else:
                 # red if less than 50 % positive
                 ws.sheet_properties.tabColor = "C00000"
+
+    with NamedTemporaryFile() as tmp:
+        wb.save(tmp.name)
+        return(tmp)
                 
-    wb.save(buffer)
-    return buffer
+    #wb.save(buffer)
+    #return buffer
