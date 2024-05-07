@@ -922,6 +922,6 @@ def change_excel_design(buffer):
            
     with io.BytesIO() as file_buffer:
         wb.save(file_buffer)
-    #content = buffer.getvalue()
-    return file_buffer
+    content = file_buffer.getvalue()
+    return content
     
