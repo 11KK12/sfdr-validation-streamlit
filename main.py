@@ -22,8 +22,8 @@ def run():
   uploaded_file = st.file_uploader("Please select a PDF file that contains SFDR templates")
 
   if uploaded_file is not None:
-      if str(uploaded_file) in st.session_state.file_results:
-        output = st.session_state.file_results[str(uploaded_file)]
+      if uploaded_file.name in st.session_state.file_results:
+        output = st.session_state.file_results[uploaded_file.name]
         
         st.download_button(
           label="📥 Download validation results",
@@ -41,18 +41,16 @@ def run():
     
           template_count = len(template_list)
   
-          text_placeholder = st.empty()
+          placeholder = st.empty()
             
           if template_count == 0:
-            #st.markdown("No SFDR templates found in the provided document.")
-            text_placeholder.markdown("No SFDR templates found in the provided document.")
+            st.markdown("No SFDR templates found in the provided document.")
           else:
-            #st.markdown(str(template_count) + " template(s) found in the provided document.")
+            st.markdown(str(template_count) + " template(s) found in the provided document.")
             estimated_costs = estimate_costs(template_count)
-            #st.markdown("\nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
-            text_placeholder.write(str(template_count) + " template(s) found in the provided document. \nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
+            st.markdown("\nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
             
-            if st.button("Start", type="primary", use_container_width=True):
+            if placeholder.button("Start", type="primary", use_container_width=True):
                 # TODO hide button after click
                 text_placeholder.empty()
           
@@ -112,7 +110,7 @@ def run():
                     template_checks[id] = validation_results
           
                 output = template_checks_to_excel(tempys, template_checks)
-                st.session_state.file_results[str(uploaded_file)] = output
+                st.session_state.file_results[uploaded_file.name] = output
                 st.balloons()
 
                 st.download_button(
