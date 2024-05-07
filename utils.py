@@ -14,6 +14,7 @@ from openpyxl.styles import Font
 from openpyxl.styles import Border, Side
 import os
 import streamlit as st
+import io
 
 # Set up open AI
 try:
@@ -803,7 +804,6 @@ def template_checks_to_excel(tempys, template_checks):
 
         val_result_dfs[k] = val_results
 
-    import io
     # buffer to use for excel writer
     buffer = io.BytesIO()
 
@@ -816,7 +816,7 @@ def template_checks_to_excel(tempys, template_checks):
             df.to_excel(writer, sheet_name=k, index=False)
             extracted_data.to_excel(writer, sheet_name=k, header=[k], startrow=15)
 
-    wb = load_workbook(buffer)
+    """wb = load_workbook(buffer)
 
     for ws in wb._sheets:
         
@@ -914,7 +914,8 @@ def template_checks_to_excel(tempys, template_checks):
                 ws.sheet_properties.tabColor = "FFC000"
             else:
                 # red if less than 50 % positive
-                ws.sheet_properties.tabColor = "C00000"
+                ws.sheet_properties.tabColor = "C00000""""
 
-    wb.save(buffer)
-    return buffer.getvalue()
+    #wb.save(buffer)
+    wb.save()
+    return buffer
