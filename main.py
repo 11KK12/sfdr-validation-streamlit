@@ -20,12 +20,19 @@ def run():
       st.session_state.file_results = {}
 
   uploaded_file = st.file_uploader("Please select a PDF file that contains SFDR templates")
+  text_placeholder = st.empty()
+  start_button_placeholder = st.empty()
+  download_button_placeholder = st.empty()
 
   if uploaded_file is not None:
+      text_placeholder.empty()
+      start_button_placeholder.empty()
+      download_button_placeholder.empty()
+    
       if uploaded_file.name in st.session_state.file_results:
         output = st.session_state.file_results[uploaded_file.name]
         
-        st.download_button(
+        download_button_placeholder.download_button(
           label="📥 Download validation results",
           data=output.getvalue(),
           file_name="validation_results.xlsx",
@@ -40,7 +47,6 @@ def run():
           template_list = find_templates_in_pdf(uploaded_file)
     
           template_count = len(template_list)
-          text_placeholder = st.empty()
             
           if template_count == 0:
             text_placeholder.markdown("No SFDR templates found in the provided document.")
@@ -50,11 +56,10 @@ def run():
             #st.markdown("\nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
             text_placeholder.markdown(str(template_count) + " template(s) found in the provided document. \nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
 
-            placeholder = st.empty()
-            if placeholder.button("Start", type="primary", use_container_width=True):
+            if start_button_placeholder.button("Start", type="primary", use_container_width=True):
                 # TODO hide button after click
                 text_placeholder.empty()
-                placeholder.empty()
+                start_button_placeholder.empty()
           
                 # Create dataframe to store extraction results
                 template_fields = pd.DataFrame()
@@ -116,7 +121,7 @@ def run():
                 st.session_state.file_results[uploaded_file.name] = output
                 st.balloons()
 
-                st.download_button(
+                download_button_placeholder.download_button(
                     label="📥 Download validation results",
                     data=output.getvalue(),
                     file_name="validation_results.xlsx",
