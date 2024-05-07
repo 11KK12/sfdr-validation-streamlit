@@ -22,9 +22,9 @@ def run():
   uploaded_file = st.file_uploader("Please select a PDF file that contains SFDR templates")
   text_placeholder = st.empty()
   start_button_placeholder = st.empty()
-  download_button_placeholder = st.empty()
   extraction_progress_bar_placeholder = st.empty()
   validation_progress_bar_placeholder = st.empty()
+  download_button_placeholder = st.empty()
 
   if uploaded_file is not None:
       text_placeholder.empty()
