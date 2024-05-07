@@ -915,8 +915,7 @@ def template_checks_to_excel(tempys, template_checks):
             else:
                 # red if less than 50 % positive
                 ws.sheet_properties.tabColor = "C00000"
-                """
-
+                
     #wb.save(buffer)
-    wb.save()
+    wb.save()"""
     return buffer
