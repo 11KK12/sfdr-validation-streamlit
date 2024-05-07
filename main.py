@@ -27,7 +27,7 @@ def run():
   
         template_count = len(template_list)
 
-        text_palceholder = st.empty()
+        text_placeholder = st.empty()
 
         with text_placeholder.container():
           
@@ -42,6 +42,7 @@ def run():
       if st.button("Start", type="primary", use_container_width=True):
 
           # TODO hide button after click
+          text_placeholder.empty()
 
           # Create dataframe to store extraction results
           template_fields = pd.DataFrame()
