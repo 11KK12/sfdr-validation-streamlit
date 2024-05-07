@@ -920,8 +920,8 @@ def change_excel_design(buffer):
                 # red if less than 50 % positive
                 ws.sheet_properties.tabColor = "C00000"
            
-    with io.BytesIO() as file_buffer:
-        wb.save(file_buffer)
-        content = file_buffer.getvalue()
+    file_buffer = io.BytesIO()
+    wb.save(file_buffer)
+    content = file_buffer.getvalue()
         
     return content
