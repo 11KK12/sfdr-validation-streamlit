@@ -15,7 +15,6 @@ from openpyxl.styles import Border, Side
 import os
 import streamlit as st
 import io
-from openpyxl.writer.excel import save_virtual_workbook
 
 # Set up open AI
 try:
@@ -921,5 +920,8 @@ def change_excel_design(buffer):
                 # red if less than 50 % positive
                 ws.sheet_properties.tabColor = "C00000"
            
-    #wb.save(buffer)
-    return io.BytesIO(save_virtual_workbook(wb))
+    with io.BytesIO() as file_buffer:
+        wb.save(file_buffer)
+    #content = buffer.getvalue()
+    return file_buffer
+    
