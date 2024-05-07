@@ -23,11 +23,15 @@ def run():
   text_placeholder = st.empty()
   start_button_placeholder = st.empty()
   download_button_placeholder = st.empty()
+  extraction_progress_bar_placeholder = st.empty()
+  validation_progress_bar_placeholder = st.empty()
 
   if uploaded_file is not None:
       text_placeholder.empty()
       start_button_placeholder.empty()
+      extraction_progress_bar_placeholder.empty()
       download_button_placeholder.empty()
+      validation_progress_bar_placeholder.empty()
     
       if uploaded_file.name in st.session_state.file_results:
         output = st.session_state.file_results[uploaded_file.name]
@@ -79,7 +83,7 @@ def run():
                 # Generate embeddings of question variables for labelling of extracted paragraphs
                 question_variables = generate_question_embeddings()
           
-                extraction_bar = st.progress(0, text="Extracting data...")
+                extraction_bar = extraction_progress_bar_placeholder.progress(0, text="Extracting data...")
           
                 # Extract data from template
                 for i, template in enumerate(template_list[:1]): # TODO [:1] for test purposes, remove later
@@ -103,7 +107,7 @@ def run():
                         else:
                             template_fields.at[k, id] = v
           
-                validation_bar = st.progress(0, text="Validating data...")
+                validation_bar = validation_progress_bar_placeholder.progress(0, text="Validating data...")
           
                 template_checks = {}
           
