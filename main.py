@@ -24,6 +24,16 @@ def run():
   if uploaded_file is not None:
       if str(uploaded_file) in st.session_state.file_results:
         output = st.session_state.file_results[str(uploaded_file)]
+        
+        st.download_button(
+          label="📥 Download validation results",
+          data=output.getvalue(),
+          file_name="validation_results.xlsx",
+          type="primary",
+          use_container_width=True,
+          mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+        
       else:
         with st.spinner("Working..."):
           # Read PDF documents with PyPDF to find starts of templates
@@ -105,14 +115,14 @@ def run():
                 st.session_state.file_results[str(uploaded_file)] = output
                 st.balloons()
 
-      st.download_button(
-          label="📥 Download validation results",
-          data=output.getvalue(),
-          file_name="validation_results.xlsx",
-          type="primary",
-          use_container_width=True,
-          mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-      )
+                st.download_button(
+                    label="📥 Download validation results",
+                    data=output.getvalue(),
+                    file_name="validation_results.xlsx",
+                    type="primary",
+                    use_container_width=True,
+                    mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                )
 
 if __name__ == "__main__":
     run()
