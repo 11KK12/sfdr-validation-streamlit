@@ -815,8 +815,12 @@ def template_checks_to_excel(tempys, template_checks):
                 k = k[len(k)-30:]
             df.to_excel(writer, sheet_name=k, index=False)
             extracted_data.to_excel(writer, sheet_name=k, header=[k], startrow=15)
+            
+    return buffer
 
-    """wb = load_workbook(buffer)
+def change_excel_design(buffer):
+    
+    wb = load_workbook(buffer)
 
     for ws in wb._sheets:
         
@@ -917,5 +921,5 @@ def template_checks_to_excel(tempys, template_checks):
                 ws.sheet_properties.tabColor = "C00000"
                 
     #wb.save(buffer)
-    wb.save()"""
+    wb.save()
     return buffer
