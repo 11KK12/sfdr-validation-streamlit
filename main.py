@@ -34,7 +34,7 @@ def run():
         
         download_button_placeholder.download_button(
           label="📥 Download validation results",
-          data=output.getvalue(),
+          data=output,
           file_name="validation_results.xlsx",
           type="primary",
           use_container_width=True,
@@ -123,7 +123,7 @@ def run():
 
                 download_button_placeholder.download_button(
                     label="📥 Download validation results",
-                    data=output.getvalue(),
+                    data=output,
                     file_name="validation_results.xlsx",
                     type="primary",
                     use_container_width=True,
