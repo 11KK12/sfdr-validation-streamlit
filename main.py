@@ -105,7 +105,8 @@ def run():
               data=output,
               #file_name="validation_results.xlsx",
               type="primary",
-              use_container_width=True
+              use_container_width=True,
+              mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           )
 
 if __name__ == "__main__":
