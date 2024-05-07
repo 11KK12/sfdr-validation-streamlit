@@ -34,7 +34,7 @@ def run():
           #st.markdown(str(template_count) + " template(s) found in the provided document.")
           estimated_costs = estimate_costs(template_count)
           #st.markdown("\nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
-          text_placeholder.text(str(template_count) + " template(s) found in the provided document. \nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs)
+          text_placeholder.text(str(template_count) + " template(s) found in the provided document. \nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
           
           if st.button("Start", type="primary", use_container_width=True, disabled=start_button_disabled):
               # TODO hide button after click
