@@ -3,7 +3,7 @@ import pandas as pd
 import os
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.formrecognizer import DocumentAnalysisClient
-from utils import find_templates_in_pdf, estimate_costs, generate_question_embeddings, extract_template_data, validate, template_checks_to_excel
+from utils import find_templates_in_pdf, estimate_costs, generate_question_embeddings, extract_template_data, validate, template_checks_to_excel, change_excel_design
 
 # $ streamlit run /workspaces/sfdr-validation-streamlit/Hello.py --server.enableXsrfProtection false
 
@@ -40,8 +40,6 @@ def run():
           template_list = find_templates_in_pdf(uploaded_file)
     
           template_count = len(template_list)
-  
-          placeholder = st.empty()
             
           if template_count == 0:
             st.markdown("No SFDR templates found in the provided document.")
@@ -49,10 +47,11 @@ def run():
             st.markdown(str(template_count) + " template(s) found in the provided document.")
             estimated_costs = estimate_costs(template_count)
             st.markdown("\nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
-            
+
+            placeholder = st.empty()
             if placeholder.button("Start", type="primary", use_container_width=True):
                 # TODO hide button after click
-                text_placeholder.empty()
+                placeholder.empty()
           
                 # Create dataframe to store extraction results
                 template_fields = pd.DataFrame()
@@ -110,6 +109,7 @@ def run():
                     template_checks[id] = validation_results
           
                 output = template_checks_to_excel(tempys, template_checks)
+                output = change_excel_design(output.getvalue())
                 st.session_state.file_results[uploaded_file.name] = output
                 st.balloons()
 
