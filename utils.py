@@ -917,4 +917,4 @@ def template_checks_to_excel(tempys, template_checks):
                 ws.sheet_properties.tabColor = "C00000"
 
     wb.save(buffer)
-    return buffer
+    return buffer.getvalue()
