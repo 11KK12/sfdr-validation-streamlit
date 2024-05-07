@@ -29,14 +29,14 @@ def run():
           
         if template_count == 0:
           #st.markdown("No SFDR templates found in the provided document.")
-          text_placeholder.text("No SFDR templates found in the provided document.")
+          text_placeholder.markdown("No SFDR templates found in the provided document.")
         else:
           #st.markdown(str(template_count) + " template(s) found in the provided document.")
           estimated_costs = estimate_costs(template_count)
           #st.markdown("\nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
-          text_placeholder.text(str(template_count) + " template(s) found in the provided document. \nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
+          text_placeholder.markdown(str(template_count) + " template(s) found in the provided document. \nEstimated cost for extraction and validation is {:0.2f} €.\n".format(estimated_costs))
           
-          if st.button("Start", type="primary", use_container_width=True, disabled=start_button_disabled):
+          if st.button("Start", type="primary", use_container_width=True):
               # TODO hide button after click
               text_placeholder.empty()
         
