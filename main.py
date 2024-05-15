@@ -86,7 +86,7 @@ def run():
                 extraction_bar = extraction_progress_bar_placeholder.progress(0, text="Extracting data...")
           
                 # Extract data from template
-                for i, template in enumerate(template_list[:1]): # TODO [:1] for test purposes, remove later
+                for i, template in enumerate(template_list[:2]): # TODO [:2] for test purposes, remove later
           
                     # Show progress
                     extraction_bar.progress(((i+1)/template_count), text="Extracting data from " + template["f_product_name"] + "...")
