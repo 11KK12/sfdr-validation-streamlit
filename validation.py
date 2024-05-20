@@ -1,3 +1,11 @@
+import openai
+
+def get_value(index, name, dataframe):
+    try:
+        return str(dataframe.at[index, name])
+    except:
+        return ""
+
 def validate(template_fields, i):
 
     # store validation results for current template
