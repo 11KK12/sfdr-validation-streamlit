@@ -113,7 +113,7 @@ def validate(template_fields, i):
         relevant_text = a_no_significant_harm + a_alignment_with_OECD_guidelines
         do_not_harm_statement_excerpt = 'EU:n luokitusjärjestelmässä vahvistetaan "ei merkittävää haittaa" -periaate'
 
-        if do_not_harm_statement_excerpt in relevant text:
+        if do_not_harm_statement_excerpt in relevant_text:
             value = True
             comment = ""
             
