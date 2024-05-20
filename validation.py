@@ -45,6 +45,7 @@ def validate(template_fields, i):
     a_no_significant_harm = get_value(i,"a_no_significant_harm", template_fields)
     a_accounting_indicators_on_sustainability_factors = get_value(i,"a_accounting_indicators_on_sustainability_factors", template_fields)
     a_principal_adverse_impacts_explaination = get_value(i,"a_principal_adverse_impacts_explaination", template_fields)
+    a_alignment_with_OECD_guidelines = get_value(i,"a_alignment_with_OECD_guidelines", template_fields)
 
     #################### Check for basic validation conditions ####################
     # basic validation conditions are such conditions that can be simply answered with yes or no
@@ -109,10 +110,13 @@ def validate(template_fields, i):
         value = False
         comment = "Product promotes environmental features and 'No significant harm' statement has not been included."
 
-        if type(f_taxonomy_do_not_harm_statement) == str:
-            if len(f_taxonomy_do_not_harm_statement) > 5:
-                value = True
-                comment = ""
+        relevant_text = a_no_significant_harm + a_alignment_with_OECD_guidelines
+        do_not_harm_statement_excerpt = "EU:n luokitusjärjestelmässä vahvistetaan "ei merkittävää haittaa" -periaate"
+
+        if do_not_harm_statement_excerpt in relevant text:
+            value = True
+            comment = ""
+            
     else:
         value = True
         comment = "'No significant harm' statement not required, product does not promote environmental features."
