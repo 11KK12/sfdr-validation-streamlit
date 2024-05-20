@@ -44,12 +44,6 @@ def estimate_costs(template_count: int) -> float:
     
     return total_costs
 
-def get_value(index, name, dataframe):
-    try:
-        return str(dataframe.at[index, name])
-    except:
-        return ""
-
 def find_templates_in_pdf(uploaded_file) -> list:
     try:
         pdf_reader = PdfReader(uploaded_file)
