@@ -3,7 +3,8 @@ import pandas as pd
 import os
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.formrecognizer import DocumentAnalysisClient
-from utils import find_templates_in_pdf, estimate_costs, generate_question_embeddings, extract_template_data, validate, template_checks_to_excel, change_excel_design
+from utils import find_templates_in_pdf, estimate_costs, generate_question_embeddings, extract_template_data, template_checks_to_excel, change_excel_design
+from validation import validate
 
 # $ streamlit run /workspaces/sfdr-validation-streamlit/Hello.py --server.enableXsrfProtection false
 
