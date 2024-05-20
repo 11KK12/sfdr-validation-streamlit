@@ -319,7 +319,7 @@ def validate(template_fields, i):
             else:
                 value = False
             comment = resp_dict["comment"]
-        except Exeption as e:
+        except Exception as e:
             value = False
             comment = "Not able to judge the adequancy of the described sustainability indicators. Exception: " + str(e)
 
