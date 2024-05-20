@@ -338,16 +338,16 @@ def validate(template_fields, i):
     socially disadvantaged communities, provided that such investments do not significantly harm any of those objectives and that the investee companies follow good 
     governance practices, in particular with respect to sound management structures, employee relations, remuneration of staff and tax compliance"""
 
-    if sm_sustainable_investment_object_yes == "selected":
+    if sm_minimum_sustainable_investment == "selected":
 
         value = False
-        comment = "" # TODO
+        comment = "Not able to validate alignment with the objectives of SFDR Article 2.17"
 
         # 5 a. the objective of the sustainable investment should be described, which should be in line with the objectives of SFDR Article 2.17
         if type(a_sustainable_investment_objectives) == str:
 
             system = """You are provided with text regarding the objectives of sustainable investments of a financial product.
-            Please carefully read the text and and check if it is in line with the objectives of the SFDR Article 2.17.
+            Please carefully read the text and and check if it is in line with the objectives of the SFDR Article 2.17. Not all objectives of SFDR Article 2.17 have to be promoted by the product but it must be at least one.
             Your answer should be structured as: {"inline_with_objectives": inline_with_objectives, "comment": comment}, where the value of inline_with_objectives is either "True" or "False" and comment is a short explaination of why you made this decision.
             Your answer must not contain anything else.
             The relevant part of the SFDR Article 2.17 is: """ + objectives
@@ -393,18 +393,14 @@ def validate(template_fields, i):
 
     #### 5b. If the table on the first page indicates that the fund makes sustainable investments and the fund includes taxonomy investments, the taxonomy objective to be promoted should be stated.
 
-    if sm_sustainable_investment_object_yes == "selected":
+    if sm_minimum_sustainable_investment == "selected":
         if type(a_sustainable_investment_objectives) == str:
 
-            if (sm_environmental_objective_taxonomy == "selected") or (sm_minimum_sustainable_investment_env_taxonomy == "selected"):
-                includes_taxonomy = True
-            else:
-                includes_taxonomy = False
-
-            if includes_taxonomy:
+            if sm_minimum_sustainable_investment_env_taxonomy == "selected":
 
                 system = """You are provided with text regarding the objectives of sustainable investments of a financial product.
-                Please carefully read the text and and check if the taxonomy objective to be promoted is stated.
+                Please carefully read the text and and check if the taxonomy objective to be promoted is stated. The text should refer to at least one of the following taxonomy objectives:
+                a) climate change mitigation; (b) climate change adaptation; (c) the sustainable use and protection of water and marine resources; (d) the transition to a circular economy; (e) pollution prevention and control; (f) the protection and restoration of biodiversity and ecosystems.
                 Your answer should be structured as: {"taxonomy_object_stated": taxonomy_object_stated, "comment": comment}, where the value of taxonomy_object_stated is either "True" or "False" and comment is a short explaination of why you made this decision.
                 Your answer must not contain anything else."""
 
@@ -432,7 +428,7 @@ def validate(template_fields, i):
 
             else:
                 value = True
-                comment = "Answer not required. No taxonomy investments included."
+                comment = "Answer not required. The funds does not include taxonomy investments."
 
         else:
             value = False
