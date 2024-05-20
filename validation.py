@@ -349,7 +349,7 @@ def validate(template_fields, i):
         # 5 a. the objective of the sustainable investment should be described, which should be in line with the objectives of SFDR Article 2.17
         if type(a_sustainable_investment_objectives) == str:
 
-            system = """You are provided with text regarding the objectives of sustainable investments of a financial product.
+            system = """You are provided with a text regarding the objectives of sustainable investments of a financial product.
             Please carefully read the text and and check if it is in line with the objectives of the SFDR Article 2.17. Not all objectives of SFDR Article 2.17 have to be promoted by the product but it must be at least one.
             Your answer should be structured as: {"inline_with_objectives": inline_with_objectives, "comment": comment}, where the value of inline_with_objectives is either "True" or "False" and comment is a short explaination of why you made this decision.
             Your answer must not contain anything else.
@@ -401,7 +401,7 @@ def validate(template_fields, i):
 
             if sm_minimum_sustainable_investment_env_taxonomy == "selected":
 
-                system = """You are provided with text regarding the objectives of sustainable investments of a financial product.
+                system = """You are provided with a text regarding the objectives of sustainable investments of a financial product.
                 Please carefully read the text and and check if the taxonomy objective to be promoted is stated. The text should refer to at least one of the following taxonomy objectives:
                 a) climate change mitigation; (b) climate change adaptation; (c) the sustainable use and protection of water and marine resources; (d) the transition to a circular economy; (e) pollution prevention and control; (f) the protection and restoration of biodiversity and ecosystems.
                 Your answer should be structured as: {"taxonomy_object_stated": taxonomy_object_stated, "comment": comment}, where the value of taxonomy_object_stated is either "True" or "False" and comment is a short explaination of why you made this decision.
@@ -451,10 +451,34 @@ def validate(template_fields, i):
     conditions.append(condition)
 
     #### 6. If the fund makes sustainable investments (i.e. ticked and % indicated in the table on the first page), the annex I indicators that are monitored in order not to cause significant harm must be listed (it is not enough to mention but to report the annex I indicators).
-    # TODO
     if sm_minimum_sustainable_investment == "selected":
         relevant_text = a_no_significant_harm + " " + a_accounting_indicators_on_sustainability_factors + " " + a_principal_adverse_impacts_explaination
-        # TODO ChatGPT stuff with indicators ??
+        
+        system = """You are provided with a text that should reference to 14 indicators that are monitored in order not to cause significant harm with a financial investment. 
+        The 14 indicators are: 1.) Greenhous gas emissions; 2.) Carbon footprint; 3.) Greenhous gas intesity of investee companies; 4.) Exposure to companies active in the fossil fuel sector; 5.) Share of non-renewable energy consumption and production; 6.) Energy consumption intensity per high impact climate sector; 7.) Activities negatively affecting biodiversitysensitive areas; 8.) Emissions to water; 9.) Hazardous waste and radioactive waste ratio; 10.) . Violations of UN Global Compact principles and Organisation for Economic Cooperation and Development (OECD) Guidelines for Multinational Enterprises; 11.) Lack of processes and compliance mechanisms to monitor compliance with UN Global Compact principles and OECD Guidelines for Multinational Enterprises; 12.) Unadjusted gender pay gap; 13.) Board gender diversity; 14.) Exposure to controversial weapons (anti-personnel mines, cluster munitions, chemical weapons and biological weapons).
+        Please carefully read the text and check if all the 14 indicators are mentioned.
+        Your answer should be structured as: {"indicators_listed": indicators_listed, "comment": comment}, where the value of indicators_listed is "True" if all 14 indicators are listed in the provided text and "False" if not. If indicators_listed is False, you should mention all indicators that have not been listed in the provided text in the comment. Otherwise the comment can be an empty string like "".
+        Your answer must not contain anything else."""
+        
+        response = openai.ChatCompletion.create(
+            engine="gpt-4", 
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": relevant_text}
+            ]    
+        )
+        resp = response['choices'][0]['message']['content']
+
+        try:
+            resp_dict = json.loads(resp)
+            if "true" in str(resp_dict["indicators_listed"]).lower(): 
+                value = True
+            else:
+                value = False
+            comment = resp_dict["comment"]
+        except:
+            value = False
+            comment = "Not able to check if answer inline with SFDR objectives."
         
     else:
         value = True
