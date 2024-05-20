@@ -1,4 +1,5 @@
 import openai
+import json
 
 def get_value(index, name, dataframe):
     try:
