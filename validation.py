@@ -41,6 +41,9 @@ def validate(template_fields, i):
     sm_environmental_objective_taxonomy = get_value(i,"sm_environmental_objective_taxonomy", template_fields)
     sm_minimum_sustainable_investment_env_taxonomy = get_value(i,"sm_minimum_sustainable_investment_env_taxonomy", template_fields)
     a_minimum_share_env_objective = get_value(i,"a_minimum_share_env_objective", template_fields)
+    a_no_significant_harm = get_value(i,"a_no_significant_harm", template_fields)
+    a_accounting_indicators_on_sustainability_factors = get_value(i,"a_accounting_indicators_on_sustainability_factors", template_fields)
+    a_principal_adverse_impacts_explaination = get_value(i,"a_principal_adverse_impacts_explaination", template_fields)
 
     #################### Check for basic validation conditions ####################
     # basic validation conditions are such conditions that can be simply answered with yes or no
@@ -447,6 +450,25 @@ def validate(template_fields, i):
     }
     conditions.append(condition)
 
+    #### 6. If the fund makes sustainable investments (i.e. ticked and % indicated in the table on the first page), the annex I indicators that are monitored in order not to cause significant harm must be listed (it is not enough to mention but to report the annex I indicators).
+    # TODO
+    if sm_minimum_sustainable_investment == "selected":
+        relevant_text = a_no_significant_harm + " " + a_accounting_indicators_on_sustainability_factors + " " + a_principal_adverse_impacts_explaination
+        # TODO ChatGPT stuff with indicators ??
+        
+    else:
+        value = True
+        comment = "Answer not required. No sustainable investments."
+
+    # Save validation result
+    condition = {
+        "name": "Annex I indicators listed?",
+        "description": "If the fund makes sustainable investments (i.e. ticked and % indicated in the table on the first page), the annex I indicators that are monitored in order not to cause significant harm must be listed (it is not enough to mention but to report the annex I indicators).", 
+        "value": value,
+        "comment": comment
+    }
+    conditions.append(condition)
+    
 
     #### 15. If the fund makes sustainable investments with an environmental objective, it should explain why it invests in sustainable investments that have an environmental objective but do not comply with the taxonomy
     #  if 5.) is selected, let ChatGPT check if 25.) provides reasonable explaination why it invests in sustainable investments that have an environmental objective but do not comply with the taxonomy -> yes/no/unclear
