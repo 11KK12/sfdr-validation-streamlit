@@ -127,6 +127,7 @@ def generate_question_embeddings():
         "a_sustainable_investment_objectives": "Mitkä ovat niiden kestävien sijoitusten tavoitteet, jotka rahoitustuotteessa aiotaan tehdä osittain, ja miten kestävä sijoitus edistää näiden tavoitteiden saavuttamista?",
         "a_no_significant_harm": "Miten kestävät sijoitukset, jotka rahoitustuotteessa aiotaan tehdä osittain eivät aiheuta haittaa yhdellekään yynmpäristöön tai yhteiskuntaan liittyvälle kestävälle sijoitustavoitteelle?",
         "a_accounting_indicators_on_sustainability_factors": "Miten kestävyystekijöihin kohdistuvia haitallisia vaikutuksia koskevat indikaattorit on otettu huomioon?",
+        "a_alignment_with_OECD_guidelines": "Miten kestävät sijoitukset ovat monikansallisille yrityksille annettujen OECD:n toimintaohjeiden sekä yritystoimintaa ja ihmisoikeuksia koskevien YK:n ohjaavien periaatteiden mukaisia?",
         "a_principal_adverse_impacts_explaination": "Otetaanko tässä rahoitustuotteessa huomioon pääasialliset haitalliset vaikutukset kestävyystekijöihin?",
         "a_investment_strategy": "Mitä sijoitusstrategiaa tässä rahoitustuotteessa noudatetaan?",
         "a_binding_elements_investment_strategy": "Mitä ovat sijoitusstrategian sitovat osatekijät, joita käytetään valittaessa sijoitukset kunkin tämän rahoitustuotteen edistämän ympäristöön tai yhteiskuntaann littyvän ominaisuuden toteutumiseksi?",
