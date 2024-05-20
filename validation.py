@@ -55,19 +55,28 @@ def validate(template_fields, i):
         value = False
         comment += "No selection made for sustainable investment object. "
     
-    # 1B
+    # 1B / 1C
+    if sm_sustainable_investment_object_yes == "selected":
+        relevant_sms = [sm_environmental_objective, sm_social_objective]
+    elif sm_sustainable_investment_object_no == "selected":
+        relevant_sms = [sm_minimum_sustainable_investment, sm_no_sustainable_investment]
+    else:
+        relevant_sms = []
+   
     num_selected = 0
-    for sm in [sm_environmental_objective, sm_social_objective, sm_minimum_sustainable_investment, sm_no_sustainable_investment]:
+    for sm in relevant_sms:
         if sm == "selected":
             num_selected += 1
     if num_selected == 0:
         value = False
         comment += "No selection made for promotion of sustainable investment objective. "
-    if num_selected > 1:
-        value = False
-        comment += "More than one selection made for promotion of sustainable investment objective. "
 
-    # 1C
+    # apparently no problem if more than one of the selection marks is selected
+    """if num_selected > 1:
+        value = False
+        comment += "More than one selection made for promotion of sustainable investment objective. " """
+
+    # 1D
     if sm_environmental_objective == "selected":
         if len([int(s) for s in f_environmental_objective if s.isdigit()]) == 0:
             value = False
@@ -147,6 +156,11 @@ def validate(template_fields, i):
                 value = False
                 comment = "Percentage of assets aligned with E/S characteristics below 70 %."
 
+    if value == False:
+        if len([int(s) for s in a_minimum_extent_taxonomy_alignment if s.isdigit()]) > 0:
+            value = True
+            comment = ""
+        
     # Save validation result
     condition = {
         "name": "Percentage of aligned assets min 70%?",
@@ -176,37 +190,8 @@ def validate(template_fields, i):
     }
     conditions.append(condition)
 
-    #### 14. If the fund makes sustainable investments, the extent to which they comply with the EU taxonomy should be indicated using pie charts.
-    if sm_sustainable_investment_object_yes == "selected":
-
-        num_numerical_info = 0
-        for var in [f_taxonomy_aligned_fossil_gas_incl_sov_bonds, f_non_taxonomy_aligned_fossil_gas_incl_sov_bonds, f_taxonomy_aligned_fossil_gas_excl_sov_bonds, f_non_taxonomy_aligned_fossil_gas_excl_sov_bonds]:
-            if type(var) == str:
-                if len([int(s) for s in var if s.isdigit()]) > 0:
-                    num_numerical_info += 1
-        
-        if num_numerical_info >= 2:
-            value = True
-            comment = ""
-        else:
-            value = False
-            comment = "Compliance with EU taxonomy not specified in the pie charts"
-
-    else:
-        value = True
-        comment = "Information not required, no sustainable investment objective."
-
-    # Save validation result
-    condition = {
-        "name": "Compliance with EU taxonomy specified in pie charts?",
-        "description": "If the fund makes sustainable investments, the extent to which they comply with the EU taxonomy should be indicated using pie charts.", 
-        "value": value,
-        "comment": comment
-    }
-    conditions.append(condition)
-
     #### 16. If the product invests in sustainable investments with a social objective, it should be disclosed what their share is. 
-    if sm_social_objective == "selected":
+    if sm_minimum_sustainable_investment == "selected":
         value = False
         comment = "Minimum share of social objective investments not provided"
 
@@ -216,7 +201,7 @@ def validate(template_fields, i):
                 comment = ""
     else:
         value = True
-        comment = "Information not required, no social objective."
+        comment = "Information not required, no sustainable investments with a social objective."
 
     # Save validation result
     condition = {
@@ -468,8 +453,8 @@ def validate(template_fields, i):
 
 
     #### 15. If the fund makes sustainable investments with an environmental objective, it should explain why it invests in sustainable investments that have an environmental objective but do not comply with the taxonomy
-    #  if 1.) is selected, let ChatGPT check if 25.) provides reasonable explaination why it invests in sustainable investments that have an environmental objective but do not comply with the taxonomy -> yes/no/unclear
-    if sm_sustainable_investment_object_yes == "selected":
+    #  if 5.) is selected, let ChatGPT check if 25.) provides reasonable explaination why it invests in sustainable investments that have an environmental objective but do not comply with the taxonomy -> yes/no/unclear
+    if sm_minimum_sustainable_investment == "selected":
     
         system = """You are provided with text regarding the share of sustainable investments in a financial product that are not aligned with the EU Taxonomy.
         Please carefully read the text and and check if it provides a reasonable explaination why the financial product invests in sustainable investments that have an environmental objective but do not comply with the taxonomy.
@@ -500,7 +485,7 @@ def validate(template_fields, i):
 
     else:
         value = True
-        comment = "Answer not required. No sustainable investment object."
+        comment = "Answer not required. No sustainable investments with an environmental objective."
 
     # Save validation result
     condition = {
