@@ -240,7 +240,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Other investments specified?",
-        "description": 'If the product invests in other investments 'other' should be given in the question details. / Jos tuote sijoittaa muihin sijoituksiin ”other” tulee antaa kysymyksen tiedot. ["What investments are included under “#2 Other”, what is their purpose and are there any minimum environmental or social safeguards?"]', 
+        "description": 'If the product invests in other investments "other" should be given in the question details. / Jos tuote sijoittaa muihin sijoituksiin ”other” tulee antaa kysymyksen tiedot. ["What investments are included under “#2 Other”, what is their purpose and are there any minimum environmental or social safeguards?"]', 
         "value": value,
         "comment": comment
     }
