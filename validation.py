@@ -141,7 +141,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Description for planned asset allocation added?",
-        "description": 'Answer to question 'What is the asset allocation planned for this financial product?' should be provided. / Tulee lisätä kuvaus tähän. ["What is the asset allocation planned for this financial product?"]', 
+        "description": 'Answer to question "What is the asset allocation planned for this financial product?" should be provided. / Tulee lisätä kuvaus tähän. ["What is the asset allocation planned for this financial product?"]', 
         "value": value,
         "comment": comment
     }
