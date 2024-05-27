@@ -18,15 +18,15 @@ import io
 
 # Set up open AI
 try:
-    openai.api_type = st.secrets["OPENAI_API_TYPE"]
-    openai.api_key = st.secrets["OPENAI_API_KEY"]
-    openai.api_base = st.secrets["OPENAI_API_BASE"]
-    openai.api_version = st.secrets["OPENAI_API_VERSION"]
-except:
     openai.api_type = os.environ["OPENAI_API_TYPE"]
     openai.api_key = os.environ["OPENAI_API_KEY"]
     openai.api_base = os.environ["OPENAI_API_BASE"]
     openai.api_version = os.environ["OPENAI_API_VERSION"]
+except:
+    openai.api_type = st.secrets["OPENAI_API_TYPE"]
+    openai.api_key = st.secrets["OPENAI_API_KEY"]
+    openai.api_base = st.secrets["OPENAI_API_BASE"]
+    openai.api_version = st.secrets["OPENAI_API_VERSION"]
 
 # Functions
 def generate_embeddings(text: str) -> list:
