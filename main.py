@@ -71,11 +71,12 @@ def run():
           
                 # Set up Azure AI Document Intelligence
                 try:
-                    document_ai_endpoint = st.secrets["DOCUMENT_AI_ENDPOINT"]
-                    document_ai_key = st.secrets["DOCUMENT_AI_KEY"]
-                except:
                     document_ai_endpoint = os.environ["DOCUMENT_AI_ENDPOINT"]
                     document_ai_key = os.environ["DOCUMENT_AI_KEY"]
+                except:
+                    document_ai_endpoint = st.secrets["DOCUMENT_AI_ENDPOINT"]
+                    document_ai_key = st.secrets["DOCUMENT_AI_KEY"]
+                    
           
                 document_analysis_client = DocumentAnalysisClient(
                     endpoint=document_ai_endpoint, credential=AzureKeyCredential(document_ai_key)
