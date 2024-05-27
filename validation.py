@@ -98,7 +98,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Table filled correctly?",
-        "description": "Check that the boxes in the table are ticked (and % if sustainable investments).", 
+        "description": 'Check that the boxes in the table are ticked (and % if sustainable investments). / Tarkista että taulukon ruutuihin täytetty ruksit (ja %-osuus, jos kestäviä sijoituksia). [Table page 1]', 
         "value": value,
         "comment": comment
     }
@@ -124,7 +124,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "'No significant harm' statement provided?",
-        "description": "If the product promotes environmental features you should add this statement. Standard mutoinen!", 
+        "description": 'If the product promotes environmental features you should add this statement. Standard mutoinen! / Jos tuote edistää ympäristöominaisuuksia tulee lisätä tämä statement. Vakio mutoinen! [Standard Statement below "How do the sustainable investments that the financial product partially intends to make, not cause significant harm to any environmental or social sustainable investment objective?"]', 
         "value": value,
         "comment": comment
     }
@@ -141,7 +141,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Description for planned asset allocation added?",
-        "description": "Answer to question 'What is the asset allocation planned for this financial product?' should be provided.", 
+        "description": 'Answer to question 'What is the asset allocation planned for this financial product?' should be provided. / Tulee lisätä kuvaus tähän. ["What is the asset allocation planned for this financial product?"]', 
         "value": value,
         "comment": comment
     }
@@ -172,7 +172,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Percentage of aligned assets min 70%?",
-        "description": "Percentage of assets aligned with E/S characteristics should be provided and at least 70 %.", 
+        "description": 'Percentage of assets aligned with E/S characteristics should be provided and at least 70 %. / Tarkista että % min 70% [Boxes below "To what minimum extent are sustainable investments with an environmental objective aligned with the EU Taxonomy?"]', 
         "value": value,
         "comment": comment
     }
@@ -192,7 +192,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "EU Taxonomy alignment indicated?",
-        "description": "If you promote environmental features, you should indicate to what extent sustainable investments are in line with the EU taxonomy. If not committed to taxonomy compliant investments should fill in 0%. Either way, the answer should contain a %.", 
+        "description": 'If you promote environmental features, you should indicate to what extent sustainable investments are in line with the EU taxonomy. If not committed to taxonomy compliant investments should fill in 0%. Either way, the answer should contain a percentage value. / Jos edistää ympäristöominaisuuksia tulee kertoa missä määrin kestävät sijoitukset ovat EU taksonomian mukaisia. Jos ei ole sitoutunut taksonianmukaisiin sijoituksiin tulee täyttää 0%. Eli ei saa poistaa kyseistä kysymystä vaikka ei olisi taksonomian mukaisia sijoituksia jos edistää ympäristöominaisuuksia. ["To what minimum extent are sustainable investments with an environmental objective aligned with the EU Taxonomy?"]', 
         "value": value,
         "comment": comment
     }
@@ -214,7 +214,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Minimum share of sustainable investments with social objective disclosed?",
-        "description": "If the product invests in sustainable investments with a social objective, it should be disclosed what their share is.", 
+        "description": 'If the product invests in sustainable investments with a social objective, it should be disclosed what their share is. / Jos tuote sijoittaa kestäviin sijoituksiin joilla on yhteiskunnallinen tavoitteite tulee kertoa mikä niiden osuus on. ["What is the minimum share of socially sustainable investments?"]', 
         "value": value,
         "comment": comment
     }
@@ -240,7 +240,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Other investments specified?",
-        "description": "If the product invests in other investments 'other' should be given in the question details.", 
+        "description": 'If the product invests in other investments 'other' should be given in the question details. / Jos tuote sijoittaa muihin sijoituksiin ”other” tulee antaa kysymyksen tiedot. ["What investments are included under “#2 Other”, what is their purpose and are there any minimum environmental or social safeguards?"]', 
         "value": value,
         "comment": comment
     }
@@ -290,7 +290,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Promoted E/S characteristics indicated?",
-        "description": "The description should indicate whether the fund promotes E and S or both.", 
+        "description": 'The description should indicate whether the fund promotes E and S or both. / Kuvauksesta tulee käydä ilmi edistääkö rahasto E ja S vai jompaakumpaa. ["What environmental and/or social characteristics are promoted by this financial product? "]', 
         "value": value,
         "comment": comment
     }
@@ -331,7 +331,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Consistent sustainability indicators?",
-        "description": "The indicators should be consistent with the previous question.", 
+        "description": 'The indicators should be consistent with the previous question. / Indikaattorit tulevat olla yhteneväisiä edellisen kysymyksen kanssa. ["What sustainability indicators are used to measure the attainment of each of the environmental or social characteristics promoted by this financial product?"]', 
         "value": value,
         "comment": comment
     }
@@ -393,7 +393,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Objectives align with SFDR Article 2.17?",
-        "description": "If the table on the first page indicates that the fund makes sustainable investments, the objective of the sustainable investment should be described, which should be in line with the objectives of SFDR Article 2.17.", 
+        "description": 'If the table on the first page indicates that the fund makes sustainable investments, the objective of the sustainable investment should be described, which should be in line with the objectives of SFDR Article 2.17. / Jos ensimmäisen sivun taulukon mukaan rahasto tekee kestäviä sijoituksia, tulee kuvata kestävän sijoituksen tavoite, jonka tulee vastata SFDR artikla 2.17 tavoitteita. ["What are the objectives of the sustainable investments that the financial product partially intends to make and how does the sustainable investment contribute to such objectives? "]', 
         "value": value,
         "comment": comment
     }
@@ -449,7 +449,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Promoted taxonomy objective stated?",
-        "description": "If the table on the first page indicates that the fund makes sustainable investments and the fund includes taxonomy investments, the taxonomy objective to be promoted should be stated.", 
+        "description": 'If the table on the first page indicates that the fund makes sustainable investments and the fund includes taxonomy investments, the taxonomy objective to be promoted should be stated. / Lisäksi jos rahasto sisältää taulukon mukaan taksonomian mukaisia sijoituksia tulee kertoa mitä taksonmian mukaista tavoitetta edistää. ["What are the objectives of the sustainable investments that the financial product partially intends to make and how does the sustainable investment contribute to such objectives? "]', 
         "value": value,
         "comment": comment
     }
@@ -497,7 +497,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Annex I indicators listed?",
-        "description": "If the fund makes sustainable investments (i.e. ticked and % indicated in the table on the first page), the annex I indicators that are monitored in order not to cause significant harm must be listed (it is not enough to mention but to report the annex I indicators).", 
+        "description": 'If the fund makes sustainable investments (i.e. ticked and % indicated in the table on the first page), the annex I indicators that are monitored in order not to cause significant harm must be listed (it is not enough to mention but to report the annex I indicators). / Jos rahasto tekee kestäviä sijoituksia (eli ensimmäisen sivun taulukossa valittu ruksi ja ilmoitettu %), tulee luetella ne annex I indikaattorit joita seurataan jotta ei aiheuta merkittävää haittaa ( ei siis riitä että mainitaan vaan että raportoidaan annex I mukaiset indikaattorit). ["How do the sustainable investments that the financial product partially intends to make, not cause significant harm to any environmental or social sustainable investment objective? "]', 
         "value": value,
         "comment": comment
     }
@@ -544,7 +544,7 @@ def validate(template_fields, i):
     # Save validation result
     condition = {
         "name": "Non-compliance with taxonomy explained?",
-        "description": "If the fund makes sustainable investments with an environmental objective, it should explain why it invests in sustainable investments that have an environmental objective but do not comply with the taxonomy.", 
+        "description": 'If the fund makes sustainable investments with an environmental objective, it should explain why it invests in sustainable investments that have an environmental objective but do not comply with the taxonomy. /Jos rahasto tekee kestäviä sijoituksia joilla ympäristötavoite tulee kertoa miksi sijoittaa kestäviin sijoituksiin joilla on ympäristötavoite mutta eivät ole taksonomian mukaisia. ["What is the minimum share of sustainable investments with an environmental objective that are not aligned with the EU Taxonomy?"]', 
         "value": value,
         "comment": comment
     }
