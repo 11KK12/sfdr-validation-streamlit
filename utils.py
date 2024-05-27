@@ -315,7 +315,7 @@ def change_excel_design(buffer):
         
         # change column width
         ws.column_dimensions['A'].width = 25
-        ws.column_dimensions['B'].width = 50
+        ws.column_dimensions['B'].width = 100
         ws.column_dimensions['C'].width = 10
         ws.column_dimensions['D'].width = 50
 
