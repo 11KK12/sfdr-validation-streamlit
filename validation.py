@@ -199,7 +199,7 @@ def validate(template_fields, i):
     conditions.append(condition)
 
     #### 16. If the product invests in sustainable investments with a social objective, it should be disclosed what their share is. 
-    if sm_minimum_sustainable_investment == "selected":
+    if sm_social_objective == "selected":
         value = False
         comment = "Minimum share of social objective investments not provided"
 
@@ -460,9 +460,14 @@ def validate(template_fields, i):
         relevant_text = a_no_significant_harm + " " + a_accounting_indicators_on_sustainability_factors + " " + a_principal_adverse_impacts_explaination
         
         system = """You are provided with a text that should reference to 14 indicators that are monitored in order not to cause significant harm with a financial investment. 
-        The 14 indicators are: 1.) Greenhous gas emissions; 2.) Carbon footprint; 3.) Greenhous gas intesity of investee companies; 4.) Exposure to companies active in the fossil fuel sector; 5.) Share of non-renewable energy consumption and production; 6.) Energy consumption intensity per high impact climate sector; 7.) Activities negatively affecting biodiversitysensitive areas; 8.) Emissions to water; 9.) Hazardous waste and radioactive waste ratio; 10.) . Violations of UN Global Compact principles and Organisation for Economic Cooperation and Development (OECD) Guidelines for Multinational Enterprises; 11.) Lack of processes and compliance mechanisms to monitor compliance with UN Global Compact principles and OECD Guidelines for Multinational Enterprises; 12.) Unadjusted gender pay gap; 13.) Board gender diversity; 14.) Exposure to controversial weapons (anti-personnel mines, cluster munitions, chemical weapons and biological weapons).
-        Please carefully read the text and check if all the 14 indicators are mentioned.
-        Your answer should be structured as: {"indicators_listed": indicators_listed, "comment": comment}, where the value of indicators_listed is "True" if all 14 indicators are listed in the provided text and "False" if not. If indicators_listed is False, you should mention all indicators that have not been listed in the provided text in the comment. Otherwise the comment can be an empty string like "".
+
+        The 14 indicators are: 1.) Greenhous gas emissions; 2.) Carbon footprint; 3.) Greenhous gas intesity of investee companies; 4.) Exposure to companies active in the fossil fuel sector; 5.) Share of non-renewable energy consumption and production; 6.) Energy consumption intensity per high impact climate sector; 7.) Activities negatively affecting biodiversitysensitive areas; 8.) Emissions to water; 9.) Hazardous waste and radioactive waste ratio; 10.) . Violations of UN Global Compact principles and Organisation for Economic Cooperation and Development (OECD) Guidelines for Multinational Enterprises; 11.) Lack of processes and compliance mechanisms to monitor compliance with UN Global Compact principles and OECD Guidelines for Multinational Enterprises; 12.) Unadjusted gender pay gap; 13.) Board gender diversity; 14.) Exposure to controversial weapons (anti-personnel mines, cluster munitions, chemical weapons and biological weapons). 
+        
+        Please carefully go through all of these 14 indicators and check if they are mentioned at least once in the provided text. The text may be in Finnish, so make sure you also consider the translations of the indicators above.
+         
+        Your answer should be structured as: {"indicators_listed": indicators_listed, "comment": comment}, where the value of indicators_listed is "True" if all 14 indicators are listed in the provided text and "False" if not. If each of the 14 indicators is mentioned at least once in the text, the condition is True. It is not a problem if one number is mentioned multiple times, as long as each of the indicators is in the text. That is all you care about. If one indicator is mentioned twice in different contexts, that is not a problem as long as it is mentioned correctly at least once. If there are further indicators in the provided text that do not correspond to any of the 14 indicators, you can ignore that information and "indicators_listed" would still be True.
+        
+        If indicators_listed is False, you should mention all indicators that have not been listed in the provided text in the comment. Otherwise the comment can be an empty string like "".
         Your answer must not contain anything else."""
         
         response = openai.ChatCompletion.create(
@@ -503,9 +508,11 @@ def validate(template_fields, i):
     #  if 5.) is selected, let ChatGPT check if 25.) provides reasonable explaination why it invests in sustainable investments that have an environmental objective but do not comply with the taxonomy -> yes/no/unclear
     if sm_minimum_sustainable_investment == "selected":
     
-        system = """You are provided with text regarding the share of sustainable investments in a financial product that are not aligned with the EU Taxonomy.
-        Please carefully read the text and and check if it provides a reasonable explaination why the financial product invests in sustainable investments that have an environmental objective but do not comply with the taxonomy.
-        Your answer should be structured as: {"reasonable_explaination": reasonable_explaination, "comment": comment}, where the value of reasonable_explaination is either "True" or "False" and comment is a short explaination of why you made this decision.
+        system = """You are provided with text regarding the share of sustainable investments in a financial product that are not aligned with the EU Taxonomy. Please carefully read the text and and check if it provides a reasonable explanation why the financial product invests in sustainable investments that have an environmental objective but do not comply with the taxonomy.
+
+        If the fund is committed to making only sustainable investments that comply with the EU taxonomy, this condition does not apply. In that case you can answer that the condition is True.
+
+        Your answer should be structured as: {"reasonable_explanation": reasonable_explanation, "comment": comment}, where the value of reasonable_explanation is either "True" or "False" and comment is a short explanation of why you made this decision.
         Your answer must not contain anything else."""
 
         text = a_minimum_share_env_objective
