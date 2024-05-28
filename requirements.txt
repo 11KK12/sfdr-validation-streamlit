@@ -9,3 +9,4 @@ pdfplumber
 openai==0.28
 azure-core
 openpyxl
+urllib3==1.26.6
